@@ -4,6 +4,8 @@
 
 #include <esp_now.h>
 
+#include "mpu.h"
+
 #define CAR_MAC CAR_MAC
 #define CONTROLLER_MAC CONTROLLER_MAC
 
@@ -53,16 +55,14 @@ void setup() {
     }
 
     esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRecv));
+
+    mpu_init(MPU6050_RANGE_8_G, MPU6050_RANGE_500_DEG, MPU6050_BAND_5_HZ);
 }
 
 void loop() {
-    String message = "Hello from controller";
-    esp_err_t result = esp_now_send(car_mac, (uint8_t *)message.c_str(), message.length());
-    
-    if (result == ESP_OK) {
-        Serial.println("Sent with success");
-    } else {
-        Serial.println("Error sending the data");
-    }
-    delay(1000);
+    // String message = "Hello from controller";
+    // esp_err_t result = esp_now_send(car_mac, (uint8_t *)message.c_str(), message.length());
+
+    mpu_loop();
+    delay(10);
 }
