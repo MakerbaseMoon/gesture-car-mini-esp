@@ -43,7 +43,7 @@ void setup() {
 
     esp_now_register_send_cb(OnDataSent);
 
-    memcpy(peerInfo.peer_addr, controller_mac, 6);
+    memcpy(peerInfo.peer_addr, car_mac, 6);
     peerInfo.channel = 0;  
     peerInfo.encrypt = false;
 
