@@ -42,6 +42,11 @@ void setup() {
     }
 
     esp_now_register_send_cb(OnDataSent);
+
+    memcpy(peerInfo.peer_addr, controller_mac, 6);
+    peerInfo.channel = 0;  
+    peerInfo.encrypt = false;
+
     if (esp_now_add_peer(&peerInfo) != ESP_OK){
         Serial.println("Failed to add peer");
         return;
