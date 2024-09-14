@@ -1,0 +1,7 @@
+#ifndef __GESTURE_CAR_HEADER_H__
+#define __GESTURE_CAR_HEADER_H__
+
+#define CAR_MAC CAR_MAC
+#define CONTROLLER_MAC CONTROLLER_MAC
+
+#endif
