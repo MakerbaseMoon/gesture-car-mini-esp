@@ -13,5 +13,6 @@ void setup() {
 
 void loop() {
     mpu_loop();
+    connect_loop();
     delay(10);
 }
