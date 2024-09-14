@@ -9,6 +9,9 @@
 #include <Adafruit_MPU6050.h>
 #include <SimpleKalmanFilter.h>
 
+#include "header.h"
+#include "connect.h"
+
 #define MPU6050_CORRECTION_TIMES 1000 // MPU6050校正次數
 #define MPU6050_AZ_DEFAULT 10 // 台灣北部重力加速度
 

@@ -25,6 +25,8 @@ SimpleKalmanFilter kalmanYaw(0.1, 0.1, 0.01);
 // 初始化時間
 unsigned long lastTime = 0;
 
+String lastMessage = "Stop";
+
 /**
  * @brief MPU6050的校正
  * 
@@ -163,5 +165,38 @@ void mpu_loop() {
     accYaw = kalmanYaw.updateEstimate(accYaw);          // 卡爾曼濾波器的偏航角
 
     Serial.printf("%f, %f, %f\n", accPitch, accRoll, accYaw);
+
+    if(accPitch >= VALUE_LEFT) {
+        if(lastMessage.indexOf("StrafeLeft") == -1) {
+            Serial.println("StrafeLeft");
+            send_message("StrafeLeft");
+            lastMessage = "StrafeLeft";
+        }
+    } else if(accPitch <= VALUE_RIGHT) {
+        if(lastMessage.indexOf("StrafeRight") == -1) {
+            Serial.println("StrafeRight");
+            send_message("StrafeRight");
+            lastMessage = "StrafeRight";
+        }
+    } else if(accRoll <= VALUE_FORWARD) {
+        if(lastMessage.indexOf("Forward") == -1) {
+            Serial.println("Forward");
+            send_message("Forward");
+            lastMessage = "Forward";
+        }
+    } else if(accRoll >= VALUE_BACK) {
+        if(lastMessage.indexOf("Backward") == -1) {
+            Serial.println("Backward");
+            send_message("Backward");
+            lastMessage = "Backward";
+        }
+    } else {
+        if(lastMessage.indexOf("Stop") == -1) {
+            Serial.println("Stop");
+            send_message("Stop");
+            lastMessage = "Stop";
+        }
+    }
+
     lastTime = currentTime; // 更新時間
 }
