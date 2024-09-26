@@ -3,8 +3,7 @@
 #include <WiFi.h>
 #include <WebSocketsClient.h>
 
-#define CAR_SSID CAR_SSID
-#define CAR_PASSWORD CAR_PASSWORD
+#include "header.h"
 
 int count = 0;
 
